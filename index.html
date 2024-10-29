@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input dengan Tabel Hasil</title>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline';
+        form-action 'self';
+        font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+        ">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #af2424;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #af2424;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Masukkan Email</h2>
+        <form id="emailForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="submit" value="Submit">
+        </form>
+
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hasil input akan ditambahkan di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let count = 1;
+
+        document.getElementById("emailForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah halaman direfresh
+
+            // Mengambil nilai dari input
+            const email = document.getElementById("email").value;
+
+            // Menambahkan baris baru ke tabel
+            const tableBody = document.getElementById("resultTable").getElementsByTagName("tbody")[0];
+            const newRow = tableBody.insertRow();
+
+            const cellNo = newRow.insertCell(0);
+            const cellEmail = newRow.insertCell(1);
+
+            cellNo.textContent = count++;
+            cellEmail.textContent = email;
+
+            // Mengosongkan input
+            document.getElementById("email").value = "";
+        });
+    </script>
+</body>
+</html>
